@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../../lib/utils";
 import { cva } from "class-variance-authority";
 
 interface BadgeProps {
@@ -12,7 +12,7 @@ interface BadgeProps {
     | "ghost"
     | "link"
     | "destructive";
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size: "xs" | "sm" | "md" | "lg" | "xl";
   className?: string;
   children: React.ReactNode;
 }
@@ -52,7 +52,15 @@ export const Badge: React.FC<BadgeProps> = ({
   children = "Badge",
 }) => {
   return (
-    <div className={cn(badgeVariants({ variant, size }), className)}>
+    <div
+      className={cn(
+        badgeVariants({
+          variant: variant as BadgeProps["variant"],
+          size: size as BadgeProps["size"],
+        }),
+        className
+      )}
+    >
       {children}
     </div>
   );
